@@ -1,11 +1,11 @@
 {
-    "name": "waku",
-    "short_name": "waku",
+    "name": "와쿠와쿠 ワクワク",
+    "short_name": "와쿠와쿠",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFF9F5",
+    "theme_color": "#E85A71",
+    "description": "일본여행, 애니, JPOP, 일본 문화를 사랑하는 사람들의 모임",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

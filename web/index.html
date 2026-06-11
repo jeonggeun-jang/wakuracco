@@ -18,21 +18,71 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="와쿠와쿠 ワクワク — 일본여행, 애니, JPOP, 일본 문화를 사랑하는 사람들의 모임">
+
+  <!-- 링크 공유(카카오톡/SNS) 미리보기용 Open Graph 태그.
+       카카오 스크래퍼는 JS를 실행하지 않으므로 반드시 정적 태그여야 한다. -->
+  <meta property="og:title" content="와쿠와쿠 ワクワク — 일본 문화를 사랑하는 사람들의 모임">
+  <meta property="og:description" content="일본여행·애니·JPOP, 일본이 좋다면 그걸로 충분한 모임. 와쿠와쿠에 놀러 오세요!">
+  <meta property="og:type" content="website">
+  <!-- 배포 후 실제 도메인의 절대 URL로 바꿔야 미리보기 이미지가 뜬다 -->
+  <meta property="og:image" content="icons/Icon-512.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="waku">
+  <meta name="apple-mobile-web-app-title" content="와쿠와쿠">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>waku</title>
+  <!-- google_fonts 런타임 로딩 가속 -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>와쿠와쿠 ワクワク — 일본 문화를 사랑하는 사람들의 모임</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #FFF9F5;
+      font-family: sans-serif;
+    }
+    #splash .emoji {
+      font-size: 48px;
+      animation: splash-pulse 1.2s ease-in-out infinite;
+    }
+    #splash p {
+      margin: 0;
+      font-size: 14px;
+      color: #E85A71;
+    }
+    @keyframes splash-pulse {
+      0%, 100% { transform: scale(1); opacity: .7; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
+  <!-- 앱이 첫 프레임을 그릴 때까지 보여줄 로딩 화면 -->
+  <div id="splash">
+    <div class="emoji">🌸</div>
+    <p>와쿠와쿠 불러오는 중…</p>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var splash = document.getElementById('splash');
+      if (splash) splash.remove();
+    });
+  </script>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
