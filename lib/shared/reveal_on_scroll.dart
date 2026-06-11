@@ -5,9 +5,16 @@ import 'package:visibility_detector/visibility_detector.dart';
 /// 화면에 처음 보이는 순간 페이드인 + 위로 떠오르는 등장 효과를 주는 래퍼.
 /// 한 번 등장한 뒤에는 다시 사라지지 않는다.
 class RevealOnScroll extends StatefulWidget {
-  const RevealOnScroll({required this.child, super.key});
+  const RevealOnScroll({
+    required this.child,
+    this.delay = Duration.zero,
+    super.key,
+  });
 
   final Widget child;
+
+  /// 보이기 시작한 뒤 등장을 늦추는 시간 (채팅 버블처럼 순차 등장용)
+  final Duration delay;
 
   @override
   State<RevealOnScroll> createState() => _RevealOnScrollState();
@@ -28,8 +35,13 @@ class _RevealOnScrollState extends State<RevealOnScroll> {
       },
       child: widget.child
           .animate(target: _revealed ? 1 : 0)
-          .fadeIn(duration: 500.ms, curve: Curves.easeOut)
+          .fadeIn(
+            delay: widget.delay,
+            duration: 500.ms,
+            curve: Curves.easeOut,
+          )
           .moveY(
+            delay: widget.delay,
             begin: 24,
             end: 0,
             duration: 500.ms,

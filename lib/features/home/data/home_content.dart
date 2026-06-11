@@ -139,4 +139,54 @@ class HomeContentRepository {
     '스포일러는 태그 달기 ⚠️',
     '덕질에 진심일 것 💕',
   ];
+
+  List<Stat> get stats => const [
+    Stat(label: '함께하는 멤버', value: 128, suffix: '명'),
+    Stat(label: '누적 정모', value: 47, suffix: '회'),
+    Stat(label: '공유된 맛집', value: 89, suffix: '곳'),
+    Stat(label: '월간 플리 수록곡', value: 1204, suffix: '곡'),
+  ];
+
+  List<ChatMessage> get chatMessages => const [
+    ChatMessage(
+      avatar: '✈️',
+      nickname: '특가요정',
+      time: '오후 8:01',
+      text: '[특가] 김포-하네다 3월 왕복 18.9만 떴어요!! 좌석 몇 개 없음 🚨',
+      reaction: '🔥 23',
+    ),
+    ChatMessage(
+      avatar: '🌸',
+      nickname: '사쿠라모찌',
+      time: '오후 8:02',
+      text: '와 미쳤다 바로 예매했어요… 이걸로 벚꽃 시즌 도쿄 갑니다',
+    ),
+    ChatMessage(
+      avatar: '🍜',
+      nickname: '라멘교주',
+      time: '오후 8:17',
+      text: '도쿄 가시는 분, 이치란보다 멘야무사시가 진리입니다 (지도 공유함)',
+      reaction: '🙏 8',
+    ),
+    ChatMessage(
+      avatar: '📺',
+      nickname: '프리렌은인생',
+      time: '오후 8:30',
+      text: '주말 온라인 상영회 「스즈메의 문단속」 확정! 일요일 8시 디코에서 봐요',
+      reaction: '👍 12',
+    ),
+    ChatMessage(
+      avatar: '🎤',
+      nickname: '하이볼두잔',
+      time: '오후 9:15',
+      text: '노래방 정모 신청 마감 D-2!! YOASOBI 부를 사람 저랑 듀엣해요 🎶',
+    ),
+    ChatMessage(
+      avatar: '🗼',
+      nickname: '도쿄타워',
+      time: '오후 9:48',
+      text: '지난주 이자카야 번개 사진 앨범에 올렸어요 📸 다들 표정 실화냐고…',
+      reaction: '❤️ 15',
+    ),
+  ];
 }

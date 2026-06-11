@@ -10,6 +10,33 @@ abstract final class AppColors {
   static const line = Color(0xFFF0E4E0);
   static const kakaoYellow = Color(0xFFFEE500);
   static const kakaoText = Color(0xFF191919);
+
+  // 출발 안내 전광판
+  static const boardBg = Color(0xFF171A2B);
+  static const boardAmber = Color(0xFFFFC24B);
+  static const boardGreen = Color(0xFF55D6A0);
+  static const boardRed = Color(0xFFFF6B6B);
+
+  // 섹션별 노선 색 (지하철 노선도 컨셉)
+  static const lineGreen = Color(0xFF2E9E6B);
+  static const lineBlue = Color(0xFF3B7DD8);
+  static const linePurple = Color(0xFF8E5BC6);
+  static const lineTeal = Color(0xFF18A99B);
+  static const lineOrange = Color(0xFFEF8232);
+
+  // 토리이(신사 문) 주홍색
+  static const torii = Color(0xFFD6485C);
+}
+
+/// 제목용 디스플레이 폰트(Jua) 헬퍼
+abstract final class AppTextStyles {
+  static TextStyle display({
+    double fontSize = 30,
+    Color color = AppColors.navy,
+    double? height,
+  }) {
+    return GoogleFonts.jua(fontSize: fontSize, color: color, height: height);
+  }
 }
 
 abstract final class AppTheme {

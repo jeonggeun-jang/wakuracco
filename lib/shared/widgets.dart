@@ -25,17 +25,22 @@ class Section extends StatelessWidget {
   }
 }
 
-/// 일본어 머리말 + 한글 제목 + 부제로 구성된 섹션 타이틀
-class SectionTitle extends StatelessWidget {
-  const SectionTitle({
+/// 일본 기차역 역명판(駅名標) 스타일의 섹션 타이틀.
+/// 노선 색 띠 + 역 번호 배지 + 역 이름으로 구성된다.
+class StationSign extends StatelessWidget {
+  const StationSign({
+    required this.code,
+    required this.name,
     required this.jp,
-    required this.title,
+    required this.lineColor,
     this.subtitle,
     super.key,
   });
 
+  final String code;
+  final String name;
   final String jp;
-  final String title;
+  final Color lineColor;
   final String? subtitle;
 
   @override
@@ -45,26 +50,84 @@ class SectionTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            jp,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: AppColors.sakura,
-              letterSpacing: 2,
+          DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: AppColors.navy.withValues(alpha: 0.1),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w800,
-              color: AppColors.navy,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(13),
+              child: Stack(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.fromLTRB(16, 12, 30, 18),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 42,
+                          height: 42,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: lineColor, width: 3.5),
+                          ),
+                          child: Text(
+                            code,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                              color: lineColor,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: AppTextStyles.display(fontSize: 26),
+                            ),
+                            Text(
+                              jp,
+                              style: TextStyle(
+                                fontSize: 11,
+                                letterSpacing: 3,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.navy.withValues(alpha: 0.5),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  // 노선 색 띠
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 6,
+                    child: ColoredBox(color: lineColor),
+                  ),
+                ],
+              ),
             ),
           ),
           if (subtitle != null) ...[
-            const SizedBox(height: 10),
+            const SizedBox(height: 14),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 640),
               child: Text(

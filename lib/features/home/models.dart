@@ -61,6 +61,32 @@ class PickCategory {
   final List<Pick> picks;
 }
 
+/// 히어로 통계 (카운트업 애니메이션용)
+class Stat {
+  const Stat({required this.label, required this.value, required this.suffix});
+
+  final String label;
+  final int value;
+  final String suffix;
+}
+
+/// 단톡방 엿보기 메시지
+class ChatMessage {
+  const ChatMessage({
+    required this.avatar,
+    required this.nickname,
+    required this.text,
+    required this.time,
+    this.reaction,
+  });
+
+  final String avatar;
+  final String nickname;
+  final String text;
+  final String time;
+  final String? reaction;
+}
+
 /// 일정에 D-day 계산을 얹은 뷰 모델
 class EventCountdown {
   const EventCountdown({required this.event, required this.daysLeft});

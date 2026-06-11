@@ -15,9 +15,11 @@ class IntroSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionTitle(
+        const StationSign(
+          code: 'W1',
+          name: '소개',
           jp: 'コミュニティ紹介',
-          title: '와쿠와쿠는 이런 모임이에요',
+          lineColor: AppColors.lineGreen,
           subtitle:
               '와쿠와쿠(ワクワク)는 "두근두근, 설렘"을 뜻하는 일본어예요. '
               '이름 그대로, 일본 이야기만 나오면 두근거리는 사람들이 모였습니다.',
@@ -41,14 +43,7 @@ class IntroSection extends ConsumerWidget {
                     children: [
                       Text(h.emoji, style: const TextStyle(fontSize: 32)),
                       const SizedBox(height: 12),
-                      Text(
-                        h.title,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.navy,
-                        ),
-                      ),
+                      Text(h.title, style: AppTextStyles.display(fontSize: 18)),
                       const SizedBox(height: 8),
                       Text(
                         h.description,
