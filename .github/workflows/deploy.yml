@@ -43,6 +43,11 @@ jobs:
       - name: 웹 빌드 (wasm)
         run: flutter build web --wasm --base-href "/${{ github.event.repository.name }}/"
 
+      # flutter.js.map은 빌드에 포함되지 않아 참조가 404를 일으키므로 제거
+      # (Lighthouse Best Practices 감점 방지)
+      - name: 소스맵 참조 제거
+        run: sed -i 's|^//# sourceMappingURL=.*||' build/web/flutter_bootstrap.js
+
       - name: Pages 설정
         uses: actions/configure-pages@v5
         with:

@@ -45,8 +45,19 @@ abstract final class AppTheme {
       colorScheme: ColorScheme.fromSeed(seedColor: AppColors.sakura),
       scaffoldBackgroundColor: AppColors.cream,
     );
+    final textTheme = GoogleFonts.notoSansKrTextTheme(base.textTheme);
     return base.copyWith(
-      textTheme: GoogleFonts.notoSansKrTextTheme(base.textTheme),
+      // 폰트 굵기는 400/700 두 가지만 사용한다.
+      // Noto Sans KR은 굵기당 ~3MB짜리 별도 파일이라, 쓰는 굵기 수가
+      // 곧 다운로드 용량이다 (버튼 기본값 w500도 w700으로 통일).
+      textTheme: textTheme.copyWith(
+        labelLarge: textTheme.labelLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
+        labelMedium: textTheme.labelMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }

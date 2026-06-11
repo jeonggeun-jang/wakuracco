@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:waku/app/theme.dart';
 import 'package:waku/features/home/models.dart';
 import 'package:waku/features/home/providers.dart';
+import 'package:waku/shared/interaction_gate.dart';
 import 'package:waku/shared/widgets.dart';
 
 /// 공항 출발 안내 전광판 스타일의 모임 일정 섹션
@@ -53,7 +56,7 @@ class EventsSection extends ConsumerWidget {
                     'DEPARTURES · 出発のご案内',
                     style: TextStyle(
                       fontSize: 13,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: 2.5,
                       color: AppColors.boardAmber,
                     ),
@@ -85,7 +88,7 @@ class EventsSection extends ConsumerWidget {
                               _dateLabel(c.event.date),
                               style: const TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w700,
                                 color: AppColors.boardAmber,
                               ),
                             ),
@@ -216,13 +219,33 @@ class _Blink extends StatefulWidget {
 }
 
 class _BlinkState extends State<_Blink> with SingleTickerProviderStateMixin {
+  // 첫 사용자 입력 전까지는 켜진 상태(1.0)로 고정해 둔다.
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 900),
-  )..repeat(reverse: true);
+    value: 1,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    if (InteractionGate.interacted.value) {
+      unawaited(_controller.repeat(reverse: true));
+    } else {
+      InteractionGate.interacted.addListener(_startBlinking);
+    }
+  }
+
+  void _startBlinking() {
+    InteractionGate.interacted.removeListener(_startBlinking);
+    if (mounted) {
+      unawaited(_controller.repeat(reverse: true));
+    }
+  }
 
   @override
   void dispose() {
+    InteractionGate.interacted.removeListener(_startBlinking);
     _controller.dispose();
     super.dispose();
   }

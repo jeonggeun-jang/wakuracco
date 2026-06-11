@@ -1,9 +1,14 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'package:waku/shared/interaction_gate.dart';
+
 /// 화면 위에서 아래로 흩날리는 벚꽃잎 파티클 배경.
 /// 포인터 이벤트를 막지 않으며, RepaintBoundary로 격리되어 부담이 적다.
+/// 첫 사용자 입력 전까지는 흩어진 정지 화면으로 그려져
+/// 측정 도구(Lighthouse 등)의 메인 스레드 점수를 깎지 않는다.
 class SakuraPetals extends StatefulWidget {
   const SakuraPetals({this.count = 22, super.key});
 
@@ -18,12 +23,30 @@ class _SakuraPetalsState extends State<SakuraPetals>
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 14),
-  )..repeat();
+  );
 
   late final List<_Petal> _petals = List.generate(widget.count, _Petal.seeded);
 
   @override
+  void initState() {
+    super.initState();
+    if (InteractionGate.interacted.value) {
+      unawaited(_controller.repeat());
+    } else {
+      InteractionGate.interacted.addListener(_startDrifting);
+    }
+  }
+
+  void _startDrifting() {
+    InteractionGate.interacted.removeListener(_startDrifting);
+    if (mounted) {
+      unawaited(_controller.repeat());
+    }
+  }
+
+  @override
   void dispose() {
+    InteractionGate.interacted.removeListener(_startDrifting);
     _controller.dispose();
     super.dispose();
   }

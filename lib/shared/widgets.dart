@@ -86,7 +86,7 @@ class StationSign extends StatelessWidget {
                             code,
                             style: TextStyle(
                               fontSize: 12,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                               color: lineColor,
                             ),
                           ),
@@ -105,7 +105,7 @@ class StationSign extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 11,
                                 letterSpacing: 3,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                                 color: AppColors.navy.withValues(alpha: 0.5),
                               ),
                             ),
@@ -165,7 +165,7 @@ class TagChip extends StatelessWidget {
         text,
         style: const TextStyle(
           fontSize: 12.5,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w700,
           color: AppColors.navy,
         ),
       ),

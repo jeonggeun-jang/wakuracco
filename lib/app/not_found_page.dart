@@ -19,7 +19,7 @@ class NotFoundPage extends StatelessWidget {
               '404 — 페이지를 찾을 수 없어요',
               style: TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 color: AppColors.navy,
               ),
             ),

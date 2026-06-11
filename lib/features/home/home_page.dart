@@ -12,6 +12,7 @@ import 'package:waku/features/home/sections/intro_section.dart';
 import 'package:waku/features/home/sections/join_section.dart';
 import 'package:waku/features/home/sections/picks_section.dart';
 import 'package:waku/features/home/sections/site_footer.dart';
+import 'package:waku/shared/interaction_gate.dart';
 import 'package:waku/shared/reveal_on_scroll.dart';
 import 'package:waku/shared/widgets.dart';
 
@@ -144,61 +145,68 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(width: 24),
         ],
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                HeroSection(
-                  onExplore: () => _scrollTo(_activitiesKey),
-                  onJoin: () => _scrollTo(_joinKey),
-                ),
-                Section(
-                  key: _introKey,
-                  child: const RevealOnScroll(child: IntroSection()),
-                ),
-                Section(
-                  key: _activitiesKey,
-                  background: Colors.white,
-                  child: const RevealOnScroll(child: ActivitiesSection()),
-                ),
-                Section(
-                  key: _eventsKey,
-                  child: const RevealOnScroll(child: EventsSection()),
-                ),
-                Section(
-                  key: _picksKey,
-                  background: Colors.white,
-                  child: const RevealOnScroll(child: PicksSection()),
-                ),
-                Section(
-                  key: _chatKey,
-                  child: const ChatSection(),
-                ),
-                Section(
-                  key: _joinKey,
-                  background: Colors.white,
-                  child: const RevealOnScroll(child: JoinSection()),
-                ),
-                const SiteFooter(),
-              ],
-            ),
-          ),
-          if (showRail)
-            Positioned(
-              right: 18,
-              top: 0,
-              bottom: 0,
-              child: Center(
-                child: _StationRail(
-                  stations: _stations,
-                  active: _activeStation,
-                  onTap: _scrollTo,
-                ),
+      // 첫 입력(호버/클릭/스크롤)을 감지해 장식 애니메이션을 깨운다
+      body: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown: (_) => InteractionGate.markInteracted(),
+        onPointerHover: (_) => InteractionGate.markInteracted(),
+        onPointerSignal: (_) => InteractionGate.markInteracted(),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  HeroSection(
+                    onExplore: () => _scrollTo(_activitiesKey),
+                    onJoin: () => _scrollTo(_joinKey),
+                  ),
+                  Section(
+                    key: _introKey,
+                    child: const RevealOnScroll(child: IntroSection()),
+                  ),
+                  Section(
+                    key: _activitiesKey,
+                    background: Colors.white,
+                    child: const RevealOnScroll(child: ActivitiesSection()),
+                  ),
+                  Section(
+                    key: _eventsKey,
+                    child: const RevealOnScroll(child: EventsSection()),
+                  ),
+                  Section(
+                    key: _picksKey,
+                    background: Colors.white,
+                    child: const RevealOnScroll(child: PicksSection()),
+                  ),
+                  Section(
+                    key: _chatKey,
+                    child: const ChatSection(),
+                  ),
+                  Section(
+                    key: _joinKey,
+                    background: Colors.white,
+                    child: const RevealOnScroll(child: JoinSection()),
+                  ),
+                  const SiteFooter(),
+                ],
               ),
             ),
-        ],
+            if (showRail)
+              Positioned(
+                right: 18,
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: _StationRail(
+                    stations: _stations,
+                    active: _activeStation,
+                    onTap: _scrollTo,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -256,7 +264,7 @@ class _StationRail extends StatelessWidget {
                           duration: const Duration(milliseconds: 250),
                           style: TextStyle(
                             fontSize: 11.5,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             color: i == active
                                 ? station.$2
                                 : AppColors.navy.withValues(alpha: 0.4),

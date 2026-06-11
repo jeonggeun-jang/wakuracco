@@ -263,7 +263,7 @@ class _PicksSectionState extends ConsumerState<PicksSection> {
                     '💡 ${grade?.$3 ?? ''}',
                     style: const TextStyle(
                       fontSize: 13,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       color: AppColors.navy,
                     ),
                   ),
@@ -356,7 +356,7 @@ class _PicksSectionState extends ConsumerState<PicksSection> {
                       child: Text(
                         '${i + 1}',
                         style: const TextStyle(
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.sakura,
                         ),
                       ),

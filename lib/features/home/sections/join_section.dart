@@ -100,7 +100,7 @@ class JoinSection extends ConsumerWidget {
                         r,
                         style: const TextStyle(
                           fontSize: 13,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
                       ),
@@ -120,7 +120,7 @@ class JoinSection extends ConsumerWidget {
                   ),
                   textStyle: GoogleFonts.notoSansKr(
                     fontSize: 16,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 child: const Text('💬 카카오톡 오픈채팅 참여하기'),
@@ -181,7 +181,7 @@ class _Stamp extends StatelessWidget {
               style: TextStyle(
                 fontSize: 9,
                 letterSpacing: 1.5,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 color: ink,
               ),
             ),
