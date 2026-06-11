@@ -39,9 +39,13 @@
 
   <meta name="theme-color" content="#E85A71">
 
-  <!-- google_fonts 런타임 로딩 가속 -->
+  <!-- 폰트 폴백(이모지)·캔버스킷 CDN 연결 가속 -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+
+  <!-- wasm 엔진을 부트스트랩 체인보다 먼저 내려받기 시작 -->
+  <link rel="preload" href="main.dart.wasm" as="fetch" crossorigin>
+  <link rel="modulepreload" href="main.dart.mjs">
 
   <title>와쿠와쿠 ワクワク — 일본 문화를 사랑하는 사람들의 모임</title>
   <link rel="manifest" href="manifest.json">

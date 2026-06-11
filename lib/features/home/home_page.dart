@@ -12,6 +12,7 @@ import 'package:waku/features/home/sections/intro_section.dart';
 import 'package:waku/features/home/sections/join_section.dart';
 import 'package:waku/features/home/sections/picks_section.dart';
 import 'package:waku/features/home/sections/site_footer.dart';
+import 'package:waku/shared/deferred_build.dart';
 import 'package:waku/shared/interaction_gate.dart';
 import 'package:waku/shared/reveal_on_scroll.dart';
 import 'package:waku/shared/widgets.dart';
@@ -161,32 +162,50 @@ class _HomePageState extends State<HomePage> {
                     onExplore: () => _scrollTo(_activitiesKey),
                     onJoin: () => _scrollTo(_joinKey),
                   ),
+                  // 화면 밖 섹션은 프레임당 하나씩 점진 빌드한다 (TBT 최적화)
                   Section(
                     key: _introKey,
-                    child: const RevealOnScroll(child: IntroSection()),
+                    child: const DeferredBuild(
+                      child: RevealOnScroll(child: IntroSection()),
+                    ),
                   ),
                   Section(
                     key: _activitiesKey,
                     background: Colors.white,
-                    child: const RevealOnScroll(child: ActivitiesSection()),
+                    child: const DeferredBuild(
+                      order: 2,
+                      child: RevealOnScroll(child: ActivitiesSection()),
+                    ),
                   ),
                   Section(
                     key: _eventsKey,
-                    child: const RevealOnScroll(child: EventsSection()),
+                    child: const DeferredBuild(
+                      order: 3,
+                      child: RevealOnScroll(child: EventsSection()),
+                    ),
                   ),
                   Section(
                     key: _picksKey,
                     background: Colors.white,
-                    child: const RevealOnScroll(child: PicksSection()),
+                    child: const DeferredBuild(
+                      order: 4,
+                      child: RevealOnScroll(child: PicksSection()),
+                    ),
                   ),
                   Section(
                     key: _chatKey,
-                    child: const ChatSection(),
+                    child: const DeferredBuild(
+                      order: 5,
+                      child: ChatSection(),
+                    ),
                   ),
                   Section(
                     key: _joinKey,
                     background: Colors.white,
-                    child: const RevealOnScroll(child: JoinSection()),
+                    child: const DeferredBuild(
+                      order: 6,
+                      child: RevealOnScroll(child: JoinSection()),
+                    ),
                   ),
                   const SiteFooter(),
                 ],

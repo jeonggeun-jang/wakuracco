@@ -5,11 +5,13 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'package:waku/app/app.dart';
 
 /// 벚꽃잎·전광판 등 무한 반복 애니메이션이 있어 pumpAndSettle 대신
-/// 고정 시간 펌프로 진행한다.
+/// 고정 시간 펌프로 진행한다. 섹션이 프레임당 하나씩 점진 빌드되므로
+/// (DeferredBuild) 충분한 횟수의 프레임을 돌린다.
 Future<void> _pumpApp(WidgetTester tester) async {
   await tester.pumpWidget(const ProviderScope(child: WakuWakuApp()));
-  await tester.pump();
-  await tester.pump(const Duration(seconds: 2));
+  for (var i = 0; i < 10; i++) {
+    await tester.pump(const Duration(milliseconds: 200));
+  }
 }
 
 Future<void> _revealAndSettle(WidgetTester tester, Finder finder) async {
