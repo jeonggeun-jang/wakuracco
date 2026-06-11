@@ -36,7 +36,6 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   go_router: ^17.3.0
-  google_fonts: ^8.1.0
   responsive_framework: ^1.5.1
   url_launcher: ^6.3.2
   visibility_detector: ^0.4.0+2
@@ -52,6 +51,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # 서브셋 폰트 (페이지에 쓰이는 글자만 추출, tool/subset_fonts.ps1로 재생성)
+  fonts:
+    - family: Noto Sans KR
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+    - family: Jua
+      fonts:
+        - asset: assets/fonts/Jua-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

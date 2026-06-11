@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+/// 내장 서브셋 폰트 패밀리 (assets/fonts, tool/subset_fonts.ps1로 재생성)
+abstract final class AppFonts {
+  static const sans = 'Noto Sans KR';
+  static const display = 'Jua';
+}
 
 /// 와쿠와쿠 브랜드 팔레트
 abstract final class AppColors {
@@ -35,7 +40,12 @@ abstract final class AppTextStyles {
     Color color = AppColors.navy,
     double? height,
   }) {
-    return GoogleFonts.jua(fontSize: fontSize, color: color, height: height);
+    return TextStyle(
+      fontFamily: AppFonts.display,
+      fontSize: fontSize,
+      color: color,
+      height: height,
+    );
   }
 }
 
@@ -44,12 +54,12 @@ abstract final class AppTheme {
     final base = ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: AppColors.sakura),
       scaffoldBackgroundColor: AppColors.cream,
+      // 폰트는 400/700 두 굵기만 내장한다. 다른 굵기를 요청하면
+      // 엔진이 가장 가까운 굵기로 매칭한다.
+      fontFamily: AppFonts.sans,
     );
-    final textTheme = GoogleFonts.notoSansKrTextTheme(base.textTheme);
+    final textTheme = base.textTheme;
     return base.copyWith(
-      // 폰트 굵기는 400/700 두 가지만 사용한다.
-      // Noto Sans KR은 굵기당 ~3MB짜리 별도 파일이라, 쓰는 굵기 수가
-      // 곧 다운로드 용량이다 (버튼 기본값 w500도 w700으로 통일).
       textTheme: textTheme.copyWith(
         labelLarge: textTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.w700,

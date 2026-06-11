@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import 'package:waku/app/app.dart';
@@ -23,8 +22,6 @@ Future<void> _revealAndSettle(WidgetTester tester, Finder finder) async {
 
 void main() {
   setUpAll(() {
-    // 테스트 환경에서는 폰트를 네트워크로 받지 않도록 차단
-    GoogleFonts.config.allowRuntimeFetching = false;
     // VisibilityDetector가 타이머로 보고를 미루지 않도록 즉시 보고
     VisibilityDetectorController.instance.updateInterval = Duration.zero;
   });

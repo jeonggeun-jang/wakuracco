@@ -7,7 +7,7 @@
 - **Flutter 3.44** (웹 전용, WebAssembly 빌드 지원)
 - **go_router** — 선언적 라우팅 (`lib/app/router.dart`)
 - **Riverpod 3** — 상태 관리 및 의존성 주입
-- **google_fonts** — Noto Sans KR
+- **서브셋 내장 폰트** — Noto Sans KR(400/700) + Jua를 페이지에 쓰이는 글자만 추출해 내장 (`assets/fonts`, 총 ~600KB). 새 글자를 쓰는 콘텐츠를 추가하면 `tool/subset_fonts.ps1` 재실행
 - **flutter_animate + visibility_detector** — 스크롤 진입 시 섹션 등장 애니메이션 (`lib/shared/reveal_on_scroll.dart`)
 - **responsive_framework** — 브레이크포인트(MOBILE/TABLET/DESKTOP) 기반 반응형
 - **url_launcher** — 카카오톡 오픈채팅 링크 연결 (링크는 `home_content.dart`의 `openChatUrl`)

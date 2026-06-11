@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -118,7 +117,8 @@ class JoinSection extends ConsumerWidget {
                     horizontal: 28,
                     vertical: 20,
                   ),
-                  textStyle: GoogleFonts.notoSansKr(
+                  textStyle: const TextStyle(
+                    fontFamily: AppFonts.sans,
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
